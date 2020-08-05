@@ -25,10 +25,14 @@ public class AccessConsumer {
     }
 
     public void generateAccessLogsFile(Access access) throws IOException, CsvDataTypeMismatchException, CsvRequiredFieldEmptyException {
-        Writer writer = Files.newBufferedWriter(Paths.get("access-log.csv"));
-        StatefulBeanToCsv<Access> beanToCsv = new StatefulBeanToCsvBuilder(writer).build();
+        String isAccessAlowed = String.valueOf(access.isAccessAllowed());
 
-        beanToCsv.write(access);
+        AccessCsv accessCsv = new AccessCsv(access.getCustomerId(), access.getDoorId(), isAccessAlowed, access.getAccessDate());
+
+        Writer writer = Files.newBufferedWriter(Paths.get("access-log.csv"));
+        StatefulBeanToCsv<AccessCsv> beanToCsv = new StatefulBeanToCsvBuilder(writer).build();
+
+        beanToCsv.write(accessCsv);
 
         writer.flush();
         writer.close();

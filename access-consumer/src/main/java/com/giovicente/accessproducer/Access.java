@@ -11,13 +11,6 @@ public class Access {
 
     public Access() { }
 
-    public Access(long customerId, long doorId, boolean isAccessAllowed, LocalDateTime accessDate) {
-        this.customerId = customerId;
-        this.doorId = doorId;
-        this.isAccessAllowed = isAccessAllowed;
-        this.accessDate = accessDate;
-    }
-
     public long getCustomerId() { return customerId; }
 
     public void setCustomerId(long customerId) { this.customerId = customerId; }
